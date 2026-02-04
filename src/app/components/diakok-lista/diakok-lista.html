@@ -1,0 +1,34 @@
+<div class="container mt-4">
+    <h2 class="mb-3">Diákok listája</h2>
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Vezetéknév</th>
+                <th>Keresztnév</th>
+                <th>Email</th>
+                <th>Osztály</th>
+                <th>Születési dátum</th>
+                <th style="width: 160px;">Műveletek</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let d of diakok; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ d.vezeteknev }}</td>
+                <td>{{ d.keresztnev }}</td>
+                <td>{{ d.email }}</td>
+                <td>{{ d.osztaly_nev }}</td>
+                <td>{{ d.szuletesi_datum }}</td>
+                <td>
+                    <button class="btn btn-sm btn-warning me-2" [routerLink]="['/diakszerkesztes', d.id]">
+                        Szerkesztés
+                    </button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteDiak(d.id)">
+                        Törlés
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

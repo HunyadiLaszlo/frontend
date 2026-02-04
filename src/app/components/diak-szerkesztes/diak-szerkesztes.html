@@ -1,0 +1,52 @@
+<div class="container mt-4">
+    <div class="card bg-dark text-light border-secondary">
+        <div class="card-body">
+            <h2 class="card-title mb-4">Diák szerkesztése</h2>
+            <form (ngSubmit)="updateDiak()">
+                <!-- Vezetéknév + Keresztnév -->
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="vezeteknev" placeholder="Vezetéknév" required
+                                name="vezeteknev" [(ngModel)]="form.vezeteknev" />
+                            <label for="vezeteknev">Vezetéknév</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="keresztnev" placeholder="Keresztnév" required
+                                name="keresztnev" [(ngModel)]="form.keresztnev" />
+                            <label for="keresztnev">Keresztnév</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Email -->
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="email" placeholder="Email" required name="email"
+                        [(ngModel)]="form.email" />
+                    <label for="email">Email</label>
+                </div>
+                <!-- Osztály -->
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="osztaly" required name="osztaly_id" [(ngModel)]="form.osztaly_id">
+                        <option value="" disabled>Válassz osztályt</option>
+                        <option *ngFor="let o of osztalyok" [value]="o.id">
+                            {{ o.nev }}
+                        </option>
+                    </select>
+                    <label for="osztaly">Osztály</label>
+                </div>
+                <!-- Születési dátum -->
+                <div class="form-floating mb-4">
+                    <input type="date" class="form-control" id="szuletesiDatum" placeholder="Születési dátum"
+                        name="szuletesi_datum" [(ngModel)]="form.szuletesi_datum" />
+                    <label for="szuletesiDatum">Születési dátum</label>
+                </div>
+                <!-- Mentés gomb -->
+                <button type="submit" class="btn btn-primary w-100">
+                    Mentés
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
