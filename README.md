@@ -15,6 +15,22 @@ class UserController extends Controller
     }
 }
 Ez a route JSON tömböt ad vissza az összes felhasználóról.
+
+***********************************************
+ANGULAR
+***********************************************
+ng new iskola
+
+npm install bootstrap
+
+//angular.json módosítása
+"styles": [
+"node_modules/bootstrap/dist/css/bootstrap.min.css",
+"src/styles.css"
+]
+
+app.html felesleges elemeinek törlése, csak ez a sor maradjon benne
+
 ________________________________________
 2️⃣ Angular – HttpClient modul importálása
 ***********************************************
