@@ -17,6 +17,9 @@ class UserController extends Controller
 Ez a route JSON tömböt ad vissza az összes felhasználóról.
 ________________________________________
 2️⃣ Angular – HttpClient modul importálása
+***********************************************
+No Standalone
+***********************************************
 Először győződj meg róla, hogy az Angular projektedben az HttpClientModule importálva van:
 // app.module.ts
 import { HttpClientModule } from '@angular/common/http';
@@ -28,6 +31,29 @@ import { HttpClientModule } from '@angular/common/http';
   ],
 })
 export class AppModule { }
+
+***********************************************
+Standalone
+***********************************************
+// app.config.ts
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
+import { routes } from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes),
+    provideHttpClient() // ⬅️ IGEN, IDE KELL TENNI!
+  ]
+};
+
+// main.ts
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { appConfig } from './app.config';
+
+bootstrapApplication(AppComponent, appConfig);
 ________________________________________
 3️⃣ Service létrehozása az API híváshoz
 Angularban érdemes service-ben kezelni az API hívásokat:
@@ -50,6 +76,10 @@ export class UserService {
 }
 ________________________________________
 4️⃣ Komponensben az adatok lekérése
+
+***********************************************
+No Standalone
+***********************************************
 // users.component.ts
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './user.service';
@@ -67,6 +97,37 @@ export class UsersComponent implements OnInit {
     this.userService.getUsers().subscribe({
       next: (data) => {
         this.users = data; // itt töltjük a változóba
+      },
+      error: (err) => {
+        console.error('Hiba az adatok lekérésekor:', err);
+      }
+    });
+  }
+}
+***********************************************
+Standalone
+***********************************************
+// users.component.ts
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { UserService } from './user.service';
+
+@Component({
+  selector: 'app-users',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './users.component.html'
+})
+export class UsersComponent implements OnInit {
+
+  users: any[] = [];
+
+  constructor(private userService: UserService) {}
+
+  ngOnInit(): void {
+    this.userService.getUsers().subscribe({
+      next: (data) => {
+        this.users = data;
       },
       error: (err) => {
         console.error('Hiba az adatok lekérésekor:', err);
