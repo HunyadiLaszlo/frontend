@@ -20,6 +20,7 @@ Ez a route JSON tömböt ad vissza az összes felhasználóról.
 ANGULAR
 ***********************************************
 ng new iskola
+ng new iskola --style=css --routing=true
 
 npm install bootstrap
 
