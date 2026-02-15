@@ -2,7 +2,7 @@
                                 ANGULAR
                                 ***********************************************
                                 ng new iskola
-				ng new iskola --style=css --routing=true
+	                        			ng new iskola --style=css --routing=true
 
                                 npm install bootstrap
 
